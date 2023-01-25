@@ -27,3 +27,20 @@ WEBOTS application is used for simulation and modeling of warehouse robot. The f
 ![image](https://user-images.githubusercontent.com/69912609/214695621-df3694c3-1420-44f4-b9ae-71f53233bce0.png)
 
 Prior to the development of final robot. Appropriate components are chosen and algorithm was developed and tested. Addition to that line follower algorithm was simulated using Webots software application.
+
+
+# Prototype
+# 1 Data Input
+The robots start working when the input is given to the serial monitor. The Bluetooth       module is used to communicate with the mobile device. 
+![image](https://user-images.githubusercontent.com/69912609/214697020-4355a433-b586-4425-bd73-cc3de577fdb3.png)
+![image](https://user-images.githubusercontent.com/69912609/214697058-2b39924c-3711-4cbc-994a-a00a111b1783.png)
+
+Figure 5.1 shows the data input method for picking the box from the starting point. After receiving the input robot moves to the package location. On reaching the specified track the track number is shown in the monitor as shown in figure 5.2
+
+# 2 Hardware Implementation
+![image](https://user-images.githubusercontent.com/69912609/214697216-361243c1-1240-4da5-a79e-d87c54872cc9.png)
+
+![image](https://user-images.githubusercontent.com/69912609/214697255-bb2a52b3-45c0-4862-9f4b-c3eba8acb573.png)
+
+
+
