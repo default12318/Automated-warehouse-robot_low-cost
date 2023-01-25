@@ -1,6 +1,7 @@
 # Automated-warehouse-robot_low-cost
 A warehouse is a commercial building generally used for storage of goods and warehousing is the process of proper storage and handling of goods. Manual warehouses use manpower (forklift, human labor) for their operation. Dramatic rise in e-commerce has increased number of people ordering worldwide from 58% in 2014 now increased to 65% in 2020. The feasibility of human labor decreased due problems like human error and limited working hours and less efficiency. Industrial automation is the use of control systems, such as computers or robots, and information technologies for handling different processes and machineries in an industry to replace a human being. In long term use automation can reduce labor cost, man power and it also reduces accident due to human error. This project is intended to construct an autonomous forklift robot that use using Path Count to find the targeted storage slot and goods identification. Experimental results are given which show that the project is a useful robot for the purposes already mentioned.  
-Keywords:  Line follower, Bluetooth, Warehouse, Motor Driver, Forklift  
+Keywords:  Line follower, Bluetooth, Warehouse, Motor Driver, Forklift 
+Group Members- Amal Antony, Alen C Binu, Alen Sabu
 
 
 # Methodology
