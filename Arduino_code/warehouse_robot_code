@@ -1,0 +1,364 @@
+#include <Servo.h>
+#define l1 3 //left motor input
+#define l2 4// left motor input
+#define r1 5// right motor input
+#define r2 6// right motor input
+Servo my;
+int left_sensor=A0; //sensor reading {
+int right_sensor=A2;
+int center_sensor=A3;
+int long_left_sensor=A4;
+int long_right_sensor=A5;// }
+int long_left;
+int long_right;
+int S_sensor;
+int R_sensor;
+int L_sensor;
+int num=0;
+int i=0;
+int P=0;
+boolean p_1=false;
+boolean p_2=false;
+boolean back=false;
+boolean D=false;
+boolean va=false;
+boolean val=false;
+boolean co=false;
+boolean oo=false;
+boolean mn=true;
+void setup(){
+    Serial.begin(9600);
+    my.attach(9);
+    my.write(0);
+    pinMode(l1,OUTPUT);
+    pinMode(l2,OUTPUT);
+    pinMode(r1,OUTPUT);
+    pinMode(r2,OUTPUT);
+    pinMode(center_sensor,INPUT);
+    pinMode(left_sensor,INPUT);
+    pinMode(right_sensor,INPUT);
+    pinMode(long_left_sensor,INPUT);
+    pinMode(long_right_sensor,INPUT);
+    digitalWrite(l1,LOW);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,LOW);
+    digitalWrite(r2,LOW);
+    
+    
+}
+void start(){
+   
+   Serial.println("enter your box number");
+    delay(1000); for(num=Serial.parseInt();num==0;num=Serial.parseInt());
+    p_1=true;
+    D=true;
+    my. write(0);
+}
+void forward(){
+    digitalWrite(l1,HIGH);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,HIGH);
+    digitalWrite(r2,LOW);
+    delay(10);
+  
+}
+void RR(){
+    digitalWrite(l1,LOW);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,HIGH);
+    digitalWrite(r2,LOW);
+    delay(100);
+    digitalWrite(l1,LOW);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,LOW);
+    digitalWrite(r2,LOW);
+}
+void LL(){
+    digitalWrite(l1,HIGH);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,LOW);
+    digitalWrite(r2,LOW);
+    delay(100);
+    digitalWrite(l1,LOW);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,LOW);
+    digitalWrite(r2,LOW);
+}
+void Reverse(){
+    digitalWrite(l1,LOW);
+    digitalWrite(l2,HIGH);
+    digitalWrite(r1,LOW);
+    digitalWrite(r2,HIGH);
+    delay(100);
+}
+void loop(){
+    digitalWrite(l1,LOW);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,LOW);
+    digitalWrite(r2,LOW);
+    L_sensor=digitalRead(left_sensor);
+    R_sensor =digitalRead(right_sensor);
+    S_sensor=digitalRead(center_sensor);
+    long_left=digitalRead(long_left_sensor);          long_right=digitalRead(long_right_sensor);
+      
+    if(S_sensor==HIGH&&L_sensor==HIGH&& R_sensor==HIGH&&p_1==false&&p_2==false){
+        start();     
+    }
+    if(p_2==true && S_sensor==LOW&& long_left==LOW && long_right==LOW &&  L_sensor==HIGH&&R_sensor==HIGH){
+        digitalWrite(l1,LOW);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,LOW);
+        delay(100);
+        for(int j=60; j>=0; j--){
+            my.write(j);
+            delay(50);
+        }
+        digitalWrite(l1,LOW);
+        digitalWrite(l2,HIGH);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,HIGH);
+        delay(700);
+        digitalWrite(l1,LOW);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,LOW);
+        delay(100);
+        p_1=false;
+        p_2=false;
+        back=false;
+        D=false;
+        va=false;
+        val=false;
+        co=false;
+        i=0;
+        delay(10);
+        start();
+        
+    }
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+     
+    if(L_sensor==LOW&&R_sensor==LOW &&S_sensor==LOW &&back==true){
+        
+        back=false;
+        mn=false;
+    }
+     
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+    
+    if(L_sensor==LOW&&R_sensor==LOW &&S_sensor==LOW &&val==false){      
+        i++;
+        P--;
+    digitalWrite(l1,HIGH);
+    digitalWrite(l2,LOW);
+    digitalWrite(r1,HIGH);
+    digitalWrite(r2,LOW);
+    delay(100);
+        delay(10);
+        val=true;
+       back=false;
+        p_1=true;
+        
+        }
+    
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+    
+       
+        
+    if(L_sensor==HIGH&&R_sensor==HIGH){      
+
+        val=false;
+        }
+    while(i== num && co==false){
+        digitalWrite(l1,HIGH);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,HIGH);
+        digitalWrite(r2,LOW);
+        delay(1000);
+        digitalWrite(l1,HIGH);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,HIGH);
+        Serial.print("track  ");
+        Serial.println(i);
+        delay(1000);
+        
+        va=true;
+        co=true;
+    }
+    while(num >i && mn==false){
+        digitalWrite(l1,HIGH);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,HIGH);
+        digitalWrite(r2,LOW);
+        delay(500);
+        digitalWrite(l1,HIGH);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,HIGH);
+        
+        delay(1000);
+        mn=true;
+        D=true;
+    }              
+    while( num > i  &&D==true){
+        
+        digitalWrite(l1,HIGH);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,HIGH);
+      
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+    
+        if(S_sensor==LOW){
+            D=false;
+            va=false;
+            back=false;
+        }
+        digitalWrite(l1,LOW);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,LOW);     
+    }//while;
+    while( va==true && num==i ){      
+        digitalWrite(l1,HIGH);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,HIGH);
+             
+       
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+    
+        if(S_sensor==LOW ){
+            va=false;
+                     
+        }
+        digitalWrite(l1,LOW);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,LOW);    
+    }
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+      
+     //while 
+    if(long_right==LOW&&long_left==LOW&&L_sensor==LOW&&S_sensor==HIGH && R_sensor==LOW && p_1== true ){
+        digitalWrite(l1,LOW);
+        digitalWrite(l2,LOW);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,LOW);
+        delay(1000);
+        for(int j=0; j<=60; j++){
+        my.write(j);
+            delay(50);
+            }
+        Serial.println("box is picked");
+        delay(1000);
+        digitalWrite(l1,LOW);
+        digitalWrite(l2,HIGH);
+        digitalWrite(r1,LOW);
+        digitalWrite(r2,HIGH);
+        delay(4000);
+        i=P;      
+        delay(100);
+        back=true;
+        p_1=false;
+        p_2=true; 
+                     
+    }
+    if(back==true){
+       Reverse();
+    }
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+     
+    if(back==true && S_sensor==LOW && L_sensor==HIGH && R_sensor==HIGH){
+        Reverse();
+          } 
+    if(back==true && S_sensor==LOW && L_sensor==HIGH && R_sensor==LOW){
+       Reverse ();
+    } 
+    
+    
+                
+    if(L_sensor==HIGH && S_sensor==LOW && R_sensor==HIGH && p_1== true && back==false){
+        forward();
+    }     
+   if( L_sensor==HIGH&& S_sensor==HIGH && R_sensor==HIGH && p_1== true && back==false){
+       forward();
+    }
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+    
+    if( L_sensor==LOW&& S_sensor==HIGH && R_sensor==LOW && p_1== true && back==false){
+      forward ();
+    }    
+    if(L_sensor==HIGH && S_sensor==LOW && R_sensor==LOW && p_1== true && back==false){
+        
+        LL();
+    }
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+     
+    if(L_sensor==LOW && S_sensor==HIGH && R_sensor==HIGH && p_1== true && back==false){
+        
+        RR();
+    }    
+    if(L_sensor==LOW && S_sensor==LOW && R_sensor==HIGH && p_1== true && back ==false){
+        RR();
+        }
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+    
+        if(L_sensor==HIGH && S_sensor==HIGH && R_sensor==LOW && p_1== true && back ==false){
+        LL();
+      
+    }
+   L_sensor=digitalRead(left_sensor);
+   R_sensor=digitalRead(right_sensor);
+   S_sensor=digitalRead(center_sensor);
+   long_left=digitalRead(long_left_sensor);
+   long_right=digitalRead(long_right_sensor);  
+    
+     if(L_sensor==LOW && S_sensor==LOW && R_sensor==LOW && p_1== true && back ==false){
+ 
+            forward ();
+  }
+    
+    
+}
