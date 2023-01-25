@@ -25,4 +25,5 @@ WEBOTS application is used for simulation and modeling of warehouse robot. The f
 ![image](https://user-images.githubusercontent.com/69912609/214695700-c29cadc0-1838-41bb-9361-8798c517c574.png)
 
 ![image](https://user-images.githubusercontent.com/69912609/214695621-df3694c3-1420-44f4-b9ae-71f53233bce0.png)
+
 Prior to the development of final robot. Appropriate components are chosen and algorithm was developed and tested. Addition to that line follower algorithm was simulated using Webots software application.
